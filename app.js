@@ -173,7 +173,7 @@
     actions.replaceChildren();
 
     if (hasSavedProgress()) {
-      var resume = make("button", "button button-primary", DATA.ui.resume);
+      var resume = make("button", "button button-primary start-cta", DATA.ui.resume);
       resume.type = "button";
       resume.addEventListener("click", showSurvey);
       actions.appendChild(resume);
@@ -188,7 +188,7 @@
       });
       actions.appendChild(restart);
     } else {
-      var start = make("button", "button button-primary", DATA.ui.start);
+      var start = make("button", "button button-primary start-cta", DATA.ui.start);
       start.type = "button";
       start.addEventListener("click", startNew);
       actions.appendChild(start);
