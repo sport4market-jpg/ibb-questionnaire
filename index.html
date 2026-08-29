@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0D2B55">
+  <meta name="description" content="Предварительный опросник для разработки нового сайта Idstein bleibt bunt.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Предварительный опросник — Idstein bleibt bunt</title>
+  <link rel="icon" type="image/jpeg" href="assets/ibb-logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header" aria-label="Шапка сайта">
+    <a class="brand" href="#start" data-action="home" aria-label="Idstein bleibt bunt — на стартовую страницу">
+      <span class="brand-crop" aria-hidden="true">
+        <img src="assets/ibb-logo.jpg" alt="" width="1744" height="1136">
+      </span>
+      <span class="brand-context">Опросник проекта</span>
+    </a>
+    <span class="save-status" id="save-status" role="status" aria-live="polite">
+      <span class="save-dot" aria-hidden="true"></span>
+      <span id="save-label">Сохранено на этом устройстве</span>
+    </span>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="start-screen" id="start-screen" aria-labelledby="start-title">
+      <div class="start-hero">
+        <div class="start-copy">
+          <p class="eyebrow" id="start-eyebrow"></p>
+          <h1 id="start-title"></h1>
+          <p class="start-description" id="start-description"></p>
+          <div class="survey-facts" id="survey-facts"></div>
+          <div class="start-actions" id="start-actions"></div>
+        </div>
+
+        <div class="route-art" aria-hidden="true">
+          <div class="route-folio">41</div>
+          <div class="route-caption">вопрос<br>за вопросом</div>
+          <div class="route-line" id="start-route"></div>
+        </div>
+      </div>
+
+      <section class="basis-section" aria-labelledby="basis-title">
+        <div class="basis-heading">
+          <span class="basis-number" aria-label="Пункты с первого по одиннадцатый">
+            <span class="basis-number-start">01</span><span class="basis-number-dash" aria-hidden="true">—</span><span class="basis-number-end">11</span>
+          </span>
+          <h2 id="basis-title"></h2>
+        </div>
+        <ol class="basis-list" id="basis-list"></ol>
+      </section>
+    </section>
+
+    <section class="survey-shell" id="survey-shell" hidden aria-label="Опросник">
+      <aside class="section-sidebar" aria-label="Разделы опросника">
+        <p class="sidebar-kicker">Маршрут</p>
+        <nav id="section-nav"></nav>
+      </aside>
+
+      <div class="survey-main">
+        <div class="mobile-section-nav" id="mobile-section-nav" aria-label="Разделы опросника"></div>
+
+        <div class="progress-block" aria-label="Прогресс заполнения">
+          <div class="progress-copy">
+            <span id="progress-label"></span>
+            <strong id="progress-percent"></strong>
+          </div>
+          <div class="progress-track" role="progressbar" id="progress-track" aria-valuemin="0" aria-valuemax="100">
+            <span id="progress-fill"></span>
+          </div>
+        </div>
+
+        <article class="question-card" id="question-card" aria-live="polite"></article>
+      </div>
+    </section>
+
+    <section class="final-screen" id="final-screen" hidden aria-labelledby="final-title">
+      <div class="final-card">
+        <div class="final-mark" aria-hidden="true">✓</div>
+        <p class="eyebrow">Финальный обзор</p>
+        <h1 id="final-title" tabindex="-1"></h1>
+        <p class="final-lead" id="final-text"></p>
+
+        <div class="summary-stats" aria-label="Статистика заполнения">
+          <div><strong id="filled-count">0</strong><span>Заполнено из 41</span></div>
+          <div><strong id="empty-count">41</strong><span>Без ответа</span></div>
+        </div>
+
+        <div class="contact-fields">
+          <div class="field-group">
+            <label for="contact-name">Имя <span>(необязательно)</span></label>
+            <input id="contact-name" name="contact_name" type="text" autocomplete="name">
+          </div>
+          <div class="field-group">
+            <label for="contact-email">E-mail <span>(необязательно)</span></label>
+            <input id="contact-email" name="contact_email" type="email" autocomplete="email" inputmode="email">
+          </div>
+        </div>
+
+        <div class="final-actions">
+          <button class="button button-secondary" type="button" id="return-button">← Вернуться к вопросам</button>
+          <button class="button button-secondary" type="button" id="download-button">Скачать копию ответов</button>
+          <button class="button button-primary" type="button" id="submit-button">Отправить ответы</button>
+        </div>
+
+        <div class="send-status" id="send-status" hidden role="status" aria-live="assertive">
+          <span aria-hidden="true">✓</span>
+          <strong>Ответы отправлены. Спасибо!</strong>
+          <button class="text-button" id="clear-button" type="button">Очистить сохранённые ответы</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Idstein bleibt bunt</span>
+  </footer>
+
+  <form id="email-form" method="POST" action="https://email.gosecureserver.in/api/send.php" target="hiddenIframe" hidden>
+    <input type="hidden" name="to" value="saxon@ukr.net">
+    <input type="hidden" name="subject" value="Новый опросник — Idstein bleibt bunt">
+    <textarea name="message" id="email-message"></textarea>
+    <input type="text" name="hp_email" value="" tabindex="-1" autocomplete="off">
+  </form>
+  <iframe name="hiddenIframe" id="hidden-iframe" title="Результат отправки" hidden></iframe>
+
+  <noscript>
+    <div class="noscript">Для работы опросника необходимо включить JavaScript.</div>
+  </noscript>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
