@@ -7,8 +7,8 @@
   var questionMeta = {};
   var firstIndexBySection = {};
   var state;
-  var sendPending = false;
   var saveTimer = null;
+  var FORM_ENDPOINT = "https://formsubmit.co/ajax/saxon@ukr.net";
 
   DATA.sections.forEach(function (section, sectionIndex) {
     firstIndexBySection[section.id] = allQuestions.length;
@@ -42,10 +42,10 @@
     contactEmail: byId("contact-email"),
     filledCount: byId("filled-count"),
     emptyCount: byId("empty-count"),
-    emailForm: byId("email-form"),
-    emailMessage: byId("email-message"),
-    iframe: byId("hidden-iframe"),
     sendStatus: byId("send-status"),
+    sendStatusIcon: byId("send-status-icon"),
+    sendStatusText: byId("send-status-text"),
+    clearButton: byId("clear-button"),
     submitButton: byId("submit-button")
   };
 
@@ -141,21 +141,10 @@
 
     byId("download-button").addEventListener("click", downloadAnswers);
     dom.submitButton.addEventListener("click", submitAnswers);
-    byId("clear-button").addEventListener("click", clearSavedAnswers);
+    dom.clearButton.addEventListener("click", clearSavedAnswers);
 
     dom.contactName.addEventListener("input", updateContact);
     dom.contactEmail.addEventListener("input", updateContact);
-
-    dom.iframe.addEventListener("load", function () {
-      if (!sendPending) return;
-      sendPending = false;
-      state.sent = true;
-      saveState();
-      dom.submitButton.disabled = false;
-      dom.submitButton.textContent = DATA.ui.submit;
-      dom.sendStatus.hidden = false;
-      dom.sendStatus.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block: "nearest" });
-    });
 
     window.addEventListener("pageshow", function (event) {
       if (event.persisted) {
@@ -227,7 +216,8 @@
     dom.finalScreen.hidden = false;
     dom.contactName.value = state.contact.name || "";
     dom.contactEmail.value = state.contact.email || "";
-    dom.sendStatus.hidden = !state.sent;
+    if (state.sent) setSendStatus("success", DATA.ui.sent);
+    else dom.sendStatus.hidden = true;
     updateSummary();
     window.scrollTo(0, 0);
     document.title = "Ответы готовы — Idstein bleibt bunt";
@@ -564,14 +554,61 @@
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
-  function submitAnswers() {
+  function setSendStatus(type, message) {
+    dom.sendStatus.classList.toggle("is-error", type === "error");
+    dom.sendStatusIcon.textContent = type === "error" ? "!" : "✓";
+    dom.sendStatusText.textContent = message;
+    dom.clearButton.hidden = type !== "success";
+    dom.sendStatus.hidden = false;
+    dom.sendStatus.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block: "nearest" });
+  }
+
+  async function submitAnswers() {
     updateContact();
-    dom.emailMessage.value = buildMessage();
-    sendPending = true;
     dom.sendStatus.hidden = true;
     dom.submitButton.disabled = true;
     dom.submitButton.textContent = DATA.ui.submitting;
-    HTMLFormElement.prototype.submit.call(dom.emailForm);
+
+    try {
+      var response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: state.contact.name.trim() || "Не указано",
+          email: state.contact.email.trim() || "Не указан",
+          message: buildMessage(),
+          _subject: "Новый опросник — Idstein bleibt bunt",
+          _template: "box",
+          _captcha: "false",
+          _honey: "",
+          _url: window.location.href
+        })
+      });
+
+      var result = await response.json().catch(function () { return {}; });
+      var accepted = result.success === true || result.success === "true";
+      if (!response.ok || !accepted) throw new Error(result.message || "Сервис не принял сообщение");
+
+      state.sent = true;
+      saveState();
+
+      if (/activat|confirm|verify/i.test(String(result.message || ""))) {
+        setSendStatus("success", "Нужно один раз подтвердить адрес: откройте письмо FormSubmit в saxon@ukr.net и нажмите Activate Form. После подтверждения ответы будут доставлены.");
+      } else {
+        setSendStatus("success", DATA.ui.sent);
+      }
+    } catch (error) {
+      state.sent = false;
+      saveState();
+      setSendStatus("error", "Не удалось отправить ответы. Проверьте интернет и попробуйте ещё раз. Сохранённая копия ответов не потеряна.");
+      console.error("Questionnaire submission failed:", error);
+    } finally {
+      dom.submitButton.disabled = false;
+      dom.submitButton.textContent = DATA.ui.submit;
+    }
   }
 
   function clearSavedAnswers() {

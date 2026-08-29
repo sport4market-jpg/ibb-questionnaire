@@ -108,8 +108,8 @@
         </div>
 
         <div class="send-status" id="send-status" hidden role="status" aria-live="assertive">
-          <span aria-hidden="true">✓</span>
-          <strong>Ответы отправлены. Спасибо!</strong>
+          <span id="send-status-icon" aria-hidden="true">✓</span>
+          <strong id="send-status-text">Ответы отправлены. Спасибо!</strong>
           <button class="text-button" id="clear-button" type="button">Очистить сохранённые ответы</button>
         </div>
       </div>
@@ -119,14 +119,6 @@
   <footer class="site-footer">
     <span>© <span id="year"></span> Idstein bleibt bunt</span>
   </footer>
-
-  <form id="email-form" method="POST" action="https://email.gosecureserver.in/api/send.php" target="hiddenIframe" hidden>
-    <input type="hidden" name="to" value="saxon@ukr.net">
-    <input type="hidden" name="subject" value="Новый опросник — Idstein bleibt bunt">
-    <textarea name="message" id="email-message"></textarea>
-    <input type="text" name="hp_email" value="" tabindex="-1" autocomplete="off">
-  </form>
-  <iframe name="hiddenIframe" id="hidden-iframe" title="Результат отправки" hidden></iframe>
 
   <noscript>
     <div class="noscript">Для работы опросника необходимо включить JavaScript.</div>

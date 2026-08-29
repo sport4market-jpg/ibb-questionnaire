@@ -636,6 +636,8 @@ main { min-height: calc(100vh - 158px); }
 .field-group input { min-height: 52px; padding: 10px 13px; }
 .send-status { margin-top: 24px; padding: 18px; color: #235c2c; background: #edf8ee; border: 1px solid #b9deb8; border-radius: 10px; }
 .send-status > span { display: inline-grid; width: 26px; height: 26px; margin-right: 7px; place-items: center; color: #fff; background: var(--green); border-radius: 50%; }
+.send-status.is-error { color: #8b1f2d; background: #fff0f2; border-color: #efb5bd; }
+.send-status.is-error > span { background: var(--red); }
 .text-button { min-height: 44px; margin-left: 12px; padding: 7px 0; color: var(--navy); background: transparent; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
 
 .site-footer {
