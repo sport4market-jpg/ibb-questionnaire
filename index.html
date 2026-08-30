@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="ru">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0D2B55">
-  <meta name="description" content="Предварительный опросник для разработки нового сайта Idstein bleibt bunt.">
+  <meta name="description" content="Vorbereitender Fragebogen für die neue Website von Idstein bleibt bunt.">
   <meta name="robots" content="noindex, nofollow">
-  <title>Предварительный опросник — Idstein bleibt bunt</title>
+  <title>Vorbereitender Fragebogen — Idstein bleibt bunt</title>
   <link rel="icon" type="image/jpeg" href="assets/ibb-logo.jpg">
-  <link rel="stylesheet" href="styles.css?v=20260829-2">
+  <link rel="stylesheet" href="styles.css?v=20260830-1">
 </head>
 <body>
-  <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-  <header class="site-header" aria-label="Шапка сайта">
-    <a class="brand" href="#start" data-action="home" aria-label="Idstein bleibt bunt — на стартовую страницу">
+  <header class="site-header" aria-label="Seitenkopf">
+    <a class="brand" href="#start" data-action="home" aria-label="Idstein bleibt bunt — zur Startseite">
       <span class="brand-crop" aria-hidden="true">
         <img src="assets/ibb-logo.jpg" alt="" width="1744" height="1136">
       </span>
-      <span class="brand-context">Опросник проекта</span>
+      <span class="brand-context">Projektfragebogen</span>
     </a>
     <span class="save-status" id="save-status" role="status" aria-live="polite">
       <span class="save-dot" aria-hidden="true"></span>
-      <span id="save-label">Сохранено на этом устройстве</span>
+      <span id="save-label">Auf diesem Gerät gespeichert</span>
     </span>
   </header>
 
@@ -38,15 +38,14 @@
         </div>
 
         <div class="route-art" aria-hidden="true">
-          <div class="route-folio">41</div>
-          <div class="route-caption">вопрос<br>за вопросом</div>
+          <div class="route-statement"><span>Frage</span><em>für</em><span>Frage</span></div>
           <div class="route-line" id="start-route"></div>
         </div>
       </div>
 
       <section class="basis-section" aria-labelledby="basis-title">
         <div class="basis-heading">
-          <span class="basis-number" aria-label="Пункты с первого по одиннадцатый">
+          <span class="basis-number" aria-label="Punkte eins bis elf">
             <span class="basis-number-start">01</span><span class="basis-number-dash" aria-hidden="true">—</span><span class="basis-number-end">11</span>
           </span>
           <h2 id="basis-title"></h2>
@@ -55,16 +54,16 @@
       </section>
     </section>
 
-    <section class="survey-shell" id="survey-shell" hidden aria-label="Опросник">
-      <aside class="section-sidebar" aria-label="Разделы опросника">
-        <p class="sidebar-kicker">Маршрут</p>
+    <section class="survey-shell" id="survey-shell" hidden aria-label="Fragebogen">
+      <aside class="section-sidebar" aria-label="Bereiche des Fragebogens">
+        <p class="sidebar-kicker">Übersicht</p>
         <nav id="section-nav"></nav>
       </aside>
 
       <div class="survey-main">
-        <div class="mobile-section-nav" id="mobile-section-nav" aria-label="Разделы опросника"></div>
+        <div class="mobile-section-nav" id="mobile-section-nav" aria-label="Bereiche des Fragebogens"></div>
 
-        <div class="progress-block" aria-label="Прогресс заполнения">
+        <div class="progress-block" aria-label="Fortschritt im Fragebogen">
           <div class="progress-copy">
             <span id="progress-label"></span>
             <strong id="progress-percent"></strong>
@@ -81,36 +80,36 @@
     <section class="final-screen" id="final-screen" hidden aria-labelledby="final-title">
       <div class="final-card">
         <div class="final-mark" aria-hidden="true">✓</div>
-        <p class="eyebrow">Финальный обзор</p>
+        <p class="eyebrow">Abschlussübersicht</p>
         <h1 id="final-title" tabindex="-1"></h1>
         <p class="final-lead" id="final-text"></p>
 
-        <div class="summary-stats" aria-label="Статистика заполнения">
-          <div><strong id="filled-count">0</strong><span>Заполнено из 41</span></div>
-          <div><strong id="empty-count">41</strong><span>Без ответа</span></div>
+        <div class="summary-stats" aria-label="Antwortübersicht">
+          <div><strong id="filled-count">0</strong><span>von 41 beantwortet</span></div>
+          <div><strong id="empty-count">41</strong><span>noch offen</span></div>
         </div>
 
         <div class="contact-fields">
           <div class="field-group">
-            <label for="contact-name">Имя <span>(необязательно)</span></label>
+            <label for="contact-name">Name <span>(optional)</span></label>
             <input id="contact-name" name="contact_name" type="text" autocomplete="name">
           </div>
           <div class="field-group">
-            <label for="contact-email">E-mail <span>(необязательно)</span></label>
+            <label for="contact-email">E-Mail <span>(optional)</span></label>
             <input id="contact-email" name="contact_email" type="email" autocomplete="email" inputmode="email">
           </div>
         </div>
 
         <div class="final-actions">
-          <button class="button button-secondary" type="button" id="return-button">← Вернуться к вопросам</button>
-          <button class="button button-secondary" type="button" id="download-button">Скачать копию ответов</button>
-          <button class="button button-primary" type="button" id="submit-button">Отправить ответы</button>
+          <button class="button button-secondary" type="button" id="return-button">← Zurück zu den Fragen</button>
+          <button class="button button-secondary" type="button" id="download-button">Antworten herunterladen</button>
+          <button class="button button-primary" type="button" id="submit-button">Antworten senden</button>
         </div>
 
         <div class="send-status" id="send-status" hidden role="status" aria-live="assertive">
           <span id="send-status-icon" aria-hidden="true">✓</span>
-          <strong id="send-status-text">Ответы отправлены. Спасибо!</strong>
-          <button class="text-button" id="clear-button" type="button">Очистить сохранённые ответы</button>
+          <strong id="send-status-text">Ihre Antworten wurden gesendet. Vielen Dank!</strong>
+          <button class="text-button" id="clear-button" type="button">Gespeicherte Antworten löschen</button>
         </div>
       </div>
     </section>
@@ -121,10 +120,10 @@
   </footer>
 
   <noscript>
-    <div class="noscript">Для работы опросника необходимо включить JavaScript.</div>
+    <div class="noscript">Für den Fragebogen muss JavaScript aktiviert sein.</div>
   </noscript>
 
   <script src="questions.js"></script>
-  <script src="app.js?v=20260829-2"></script>
+  <script src="app.js?v=20260830-1"></script>
 </body>
 </html>

@@ -2,154 +2,152 @@
   "use strict";
 
   const ui = {
-    eyebrow: "Предварительный опросник",
-    title: "Новый сайт для Idstein bleibt bunt.",
-    description: "Опросник поможет уточнить оставшиеся вопросы перед подготовкой конкретного предложения. Многие основные моменты уже обсуждались на первой встрече, поэтому здесь мы не повторяем то, что уже известно.",
-    facts: "12 тематических разделов · 41 основной вопрос",
-    basisTitle: "Что уже принимается за основу",
-    start: "Начать заполнение →",
-    resume: "Продолжить заполнение →",
-    restart: "Начать заново",
-    back: "← Назад",
-    next: "Далее →",
-    optional: "Необязательно",
-    one: "Выберите один вариант.",
-    many: "Можно выбрать несколько вариантов — при необходимости все подходящие.",
-    max3: "Выберите не более трёх вариантов.",
-    section: "Раздел",
-    question: "Вопрос",
-    of: "из",
-    finalTitle: "Спасибо. Можно отправлять ответы.",
-    finalText: "Проверьте итог и при желании оставьте имя и e-mail. Ответы можно отправить или сохранить локальной копией.",
-    filled: "Заполнено",
-    unanswered: "Без ответа",
-    name: "Имя",
-    email: "E-mail",
-    returnToQuestions: "← Вернуться к вопросам",
-    download: "Скачать копию ответов",
-    submit: "Отправить ответы",
-    submitting: "Отправляем…",
-    sent: "Ответы отправлены. Спасибо!",
-    clear: "Очистить сохранённые ответы",
-    clearConfirm: "Удалить локально сохранённую копию ответов?",
-    saved: "Сохранено на этом устройстве",
+    eyebrow: "Vorbereitender Fragebogen",
+    title: "Die neue Website für Idstein bleibt bunt.",
+    description: "Mit diesem Fragebogen klären wir die noch offenen Punkte, bevor wir ein konkretes Angebot erstellen. Viele Grundlagen wurden bereits im ersten Gespräch besprochen und werden hier nicht erneut abgefragt.",
+    facts: "12 Themenbereiche · 41 zentrale Fragen",
+    basisTitle: "Was bereits als Grundlage feststeht",
+    start: "Fragebogen starten →",
+    back: "← Zurück",
+    next: "Weiter →",
+    optional: "Optional",
+    one: "Bitte wählen Sie eine Option.",
+    many: "Mehrfachauswahl möglich – wählen Sie alle passenden Optionen.",
+    max3: "Bitte wählen Sie höchstens drei Optionen.",
+    section: "Bereich",
+    question: "Frage",
+    of: "von",
+    finalTitle: "Vielen Dank. Ihre Antworten sind bereit.",
+    finalText: "Prüfen Sie die Übersicht und ergänzen Sie auf Wunsch Ihren Namen und Ihre E-Mail-Adresse. Sie können die Antworten senden oder als lokale Kopie speichern.",
+    filled: "Beantwortet",
+    unanswered: "Offen",
+    name: "Name",
+    email: "E-Mail",
+    returnToQuestions: "← Zurück zu den Fragen",
+    download: "Antworten herunterladen",
+    submit: "Antworten senden",
+    submitting: "Wird gesendet …",
+    sent: "Ihre Antworten wurden gesendet. Vielen Dank!",
+    clear: "Gespeicherte Antworten löschen",
+    clearConfirm: "Möchten Sie die lokal gespeicherten Antworten wirklich löschen?",
+    saved: "Auf diesem Gerät gespeichert",
     counter: function (count, max) { return count + " / " + max; }
   };
 
   const basis = [
-    "Существующее полезное содержание сайта должно быть сохранено и перенесено в новую структуру.",
-    "Существующие проекты и история мероприятий должны быть сохранены.",
-    "Новый сайт должен получить современный и профессиональный внешний вид.",
-    "Сайт должен быть в первую очередь удобен для смартфона.",
-    "Работа с содержанием должна быть максимально простой.",
-    "Существующая база Newsletter-подписчиков должна быть сохранена.",
-    "В Social Media на данном этапе используются Facebook и Instagram.",
-    "Направление Zusammenarbeit mit der lokalen Wirtschaft должно войти уже в первую версию.",
-    "После запуска предполагается постоянное сопровождение сайта, Newsletter и Social Media.",
-    "Ориентир — подготовить новый сайт до конца года.",
-    "Технические вопросы Domain, Hosting, CMS, существующей системы и доступов уточняются отдельно."
+    "Relevante Inhalte der bestehenden Website sollen erhalten und in die neue Struktur übernommen werden.",
+    "Bestehende Projekte und die Veranstaltungshistorie sollen erhalten bleiben.",
+    "Die neue Website soll modern und professionell gestaltet sein.",
+    "Die Website soll in erster Linie auf Smartphones komfortabel nutzbar sein.",
+    "Die Pflege der Inhalte soll so einfach wie möglich sein.",
+    "Der bestehende Newsletter-Verteiler soll erhalten bleiben.",
+    "Für Social Media werden derzeit Facebook und Instagram genutzt.",
+    "Die Zusammenarbeit mit der lokalen Wirtschaft soll bereits Teil der ersten Version sein.",
+    "Nach dem Start ist eine laufende Betreuung von Website, Newsletter und Social Media vorgesehen.",
+    "Ziel ist es, die neue Website bis zum Jahresende fertigzustellen.",
+    "Technische Fragen zu Domain, Hosting, CMS, dem bestehenden System und den Zugängen werden separat geklärt."
   ];
 
   const sections = [
     {
-      id: "goals", short: "Цели", title: "Цели и посетители сайта", color: "#D9264F", intro: "Сначала определим, для кого создаётся сайт и какой результат должен быть заметен сразу.",
+      id: "goals", short: "Ziele", title: "Ziele und Zielgruppen", color: "#D9264F", intro: "Zunächst klären wir, für wen die Website entsteht und welche Wirkung sie unmittelbar erzielen soll.",
       questions: [
-        { id: "1.1", title: "Какие три задачи нового сайта для вас наиболее важны?", type: "checkbox", max: 3, options: ["Создать современное и профессиональное цифровое представительство Idstein bleibt bunt", "Понятно объяснять, кто такие Idstein bleibt bunt и за какие ценности выступает Netzwerk", "Быстро информировать о предстоящих мероприятиях", "Показывать текущую деятельность и результаты IBB", "Представлять Netzwerkpartner", "Привлекать новых участников и Netzwerkpartner", "Лучше обращаться к молодым людям и новым аудиториям", "Развивать сотрудничество с местными предприятиями и организациями"] },
-        { id: "1.2", title: "Какие три группы посетителей являются для вас наиболее важными?", type: "checkbox", max: 3, options: ["Жители Idstein", "Люди, которые ищут мероприятия и события", "Существующие Netzwerkpartner", "Потенциальные Netzwerkpartner", "Молодёжь", "Семьи", "Пожилые люди", "Unternehmen / Handwerk / Gastronomie / Banken", "Городские и общественные учреждения", "Presse / Medien"] },
-        { id: "1.3", title: "Что посетитель должен понять об Idstein bleibt bunt в первые секунды после открытия сайта?", type: "textarea", hint: "Например: кто вы, чем занимаетесь, за какие ценности выступаете и что происходит сейчас.", optional: true }
+        { id: "1.1", title: "Welche drei Aufgaben der neuen Website sind für Sie am wichtigsten?", type: "checkbox", max: 3, options: ["Idstein bleibt bunt modern und professionell im Internet präsentieren", "Verständlich erklären, wer Idstein bleibt bunt ist und für welche Werte das Netzwerk steht", "Schnell über bevorstehende Veranstaltungen informieren", "Aktuelle Aktivitäten und Ergebnisse von IBB sichtbar machen", "Netzwerkpartner vorstellen", "Neue Mitwirkende und Netzwerkpartner gewinnen", "Junge Menschen und neue Zielgruppen besser erreichen", "Die Zusammenarbeit mit lokalen Unternehmen und Organisationen ausbauen"] },
+        { id: "1.2", title: "Welche drei Besuchergruppen sind für Sie am wichtigsten?", type: "checkbox", max: 3, options: ["Einwohnerinnen und Einwohner von Idstein", "Menschen, die Veranstaltungen und Termine suchen", "Bestehende Netzwerkpartner", "Potenzielle Netzwerkpartner", "Jugendliche und junge Erwachsene", "Familien", "Ältere Menschen", "Unternehmen / Handwerk / Gastronomie / Banken", "Städtische und öffentliche Einrichtungen", "Presse / Medien"] },
+        { id: "1.3", title: "Was sollen Besucherinnen und Besucher in den ersten Sekunden über Idstein bleibt bunt verstehen?", type: "textarea", hint: "Zum Beispiel: Wer Sie sind, was Sie tun, wofür Sie stehen und was gerade aktuell ist.", optional: true }
       ]
     },
     {
-      id: "structure", short: "Структура", title: "Структура и содержание сайта", color: "#F28C00", intro: "Основные существующие направления сайта сохраняются, но могут быть заново структурированы и представлены более современно. Дополнительно должно появиться направление Zusammenarbeit mit der lokalen Wirtschaft.",
+      id: "structure", short: "Struktur", title: "Struktur und Inhalte der Website", color: "#F28C00", intro: "Die bestehenden Themenbereiche bleiben grundsätzlich erhalten, können jedoch neu geordnet und moderner präsentiert werden. Zusätzlich soll der Bereich „Zusammenarbeit mit der lokalen Wirtschaft“ entstehen.",
       questions: [
-        { id: "2.1", title: "Есть ли существующий раздел или тема, которые в новой версии сайта больше не нужны?", type: "radio", options: ["Нет", "Да"], conditional: { when: "Да", label: "Что именно можно убрать?" } },
-        { id: "2.2", title: "Есть ли, кроме Zusammenarbeit mit der lokalen Wirtschaft, новая тема или раздел, которого сейчас нет, но который должен появиться?", type: "radio", options: ["Нет", "Да"], conditional: { when: "Да", label: "Какой раздел или тема?" } },
-        { id: "2.3", title: "Нужно ли на сайте предусмотреть отдельный раздел для документов и материалов?", type: "radio", hint: "Например: Flyer, Broschüren, Presseinformationen, Informationsmaterial или PDF-Dokumente.", options: ["Да, отдельный раздел Downloads / Materialien", "Достаточно размещать документы на соответствующих страницах", "Пока в этом нет необходимости", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "2.4", title: "Какая информация должна быть особенно заметна и доступна уже на главной странице?", type: "checkbox", max: 3, options: ["Ближайшие мероприятия", "Кто такие Idstein bleibt bunt и чем они занимаются", "Актуальные новости и важные темы", "Проекты и текущая деятельность IBB", "Netzwerkpartner", "Возможность принять участие или поддержать IBB", "Контактная информация", "Подписка на Newsletter", "Zusammenarbeit mit der lokalen Wirtschaft"] }
+        { id: "2.1", title: "Gibt es einen bestehenden Bereich oder ein Thema, das auf der neuen Website nicht mehr benötigt wird?", type: "radio", options: ["Nein", "Ja"], conditional: { when: "Ja", label: "Was kann entfallen?" } },
+        { id: "2.2", title: "Gibt es neben der Zusammenarbeit mit der lokalen Wirtschaft ein weiteres neues Thema, das aufgenommen werden soll?", type: "radio", options: ["Nein", "Ja"], conditional: { when: "Ja", label: "Welcher Bereich oder welches Thema?" } },
+        { id: "2.3", title: "Soll die Website einen eigenen Bereich für Dokumente und Materialien erhalten?", type: "radio", hint: "Zum Beispiel Flyer, Broschüren, Presseinformationen, Informationsmaterial oder PDF-Dokumente.", options: ["Ja, als eigener Bereich „Downloads / Materialien“", "Dokumente können auf den jeweils passenden Seiten eingebunden werden", "Derzeit besteht dafür kein Bedarf", "Wir wünschen eine Empfehlung"] },
+        { id: "2.4", title: "Welche Informationen sollen bereits auf der Startseite besonders sichtbar und schnell erreichbar sein?", type: "checkbox", max: 3, options: ["Die nächsten Veranstaltungen", "Wer Idstein bleibt bunt ist und was das Netzwerk macht", "Aktuelle Nachrichten und wichtige Themen", "Projekte und laufende Aktivitäten von IBB", "Netzwerkpartner", "Möglichkeiten zum Mitmachen oder Unterstützen", "Kontaktinformationen", "Newsletter-Anmeldung", "Zusammenarbeit mit der lokalen Wirtschaft"] }
       ]
     },
     {
-      id: "projects", short: "Projekte", title: "Projekte и Netzwerkpartner", color: "#F2C300", intro: "Мы исходим из того, что существующие проекты будут перенесены на новый сайт. Перед переносом Netzwerk потребуется актуальный список действующих организаций.",
+      id: "projects", short: "Projekte", title: "Projekte und Netzwerkpartner", color: "#F2C300", intro: "Wir gehen davon aus, dass die bestehenden Projekte auf die neue Website übernommen werden. Für die Übernahme des Netzwerks wird eine aktuelle Liste der aktiven Organisationen benötigt.",
       questions: [
-        { id: "3.1", title: "Есть ли существующие проекты, которые не нужно переносить на новый сайт?", type: "radio", options: ["Нет, существующие проекты следует сохранить", "Да, отдельные проекты не нужно переносить"], conditional: { when: "Да, отдельные проекты не нужно переносить", label: "Какие проекты не нужно переносить?" } },
-        { id: "3.2", title: "Какую информацию вы хотели бы видеть при представлении отдельного проекта?", type: "checkbox", options: ["Название", "Краткое описание", "Подробное описание", "Изображения", "Период / дата проекта", "Связанные мероприятия", "Результаты / Rückblick", "Ссылки или документы", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "3.3", title: "Какую информацию нужно показывать о Netzwerkpartner?", type: "radio", options: ["Только логотип", "Логотип, название и ссылка", "Логотип, название, короткое описание и ссылка", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "3.4", title: "Нужно ли разделять Netzwerkpartner по типам?", type: "radio", hint: "Например: школы, церкви и религиозные организации, политические партии, Vereine, Unternehmen, öffentliche Einrichtungen, soziale Einrichtungen и другие категории.", options: ["Да", "Нет", "Хотели бы получить рекомендацию исполнителя"], conditional: { when: "Да", label: "Если у вас уже есть представление, укажите возможные категории." } }
+        { id: "3.1", title: "Gibt es bestehende Projekte, die nicht auf die neue Website übernommen werden sollen?", type: "radio", options: ["Nein, die bestehenden Projekte sollen erhalten bleiben", "Ja, einzelne Projekte sollen nicht übernommen werden"], conditional: { when: "Ja, einzelne Projekte sollen nicht übernommen werden", label: "Welche Projekte sollen nicht übernommen werden?" } },
+        { id: "3.2", title: "Welche Informationen sollen bei einem einzelnen Projekt gezeigt werden?", type: "checkbox", options: ["Titel", "Kurzbeschreibung", "Ausführliche Beschreibung", "Bilder", "Zeitraum / Datum des Projekts", "Zugehörige Veranstaltungen", "Ergebnisse / Rückblick", "Links oder Dokumente", "Wir wünschen eine Empfehlung"] },
+        { id: "3.3", title: "Welche Informationen sollen zu einem Netzwerkpartner angezeigt werden?", type: "radio", options: ["Nur das Logo", "Logo, Name und Link", "Logo, Name, Kurzbeschreibung und Link", "Wir wünschen eine Empfehlung"] },
+        { id: "3.4", title: "Sollen Netzwerkpartner nach Kategorien gegliedert werden?", type: "radio", hint: "Zum Beispiel Schulen, Kirchen und Religionsgemeinschaften, Parteien, Vereine, Unternehmen, öffentliche Einrichtungen, soziale Einrichtungen und weitere Kategorien.", options: ["Ja", "Nein", "Wir wünschen eine Empfehlung"], conditional: { when: "Ja", label: "Welche Kategorien sind aus Ihrer Sicht sinnvoll?" } }
       ]
     },
     {
-      id: "content", short: "Контент", title: "Перенос и переработка существующего содержания", color: "#48A942", intro: "Существующий сайт будет использоваться как основная база для переноса новостей, мероприятий, проектов, страниц, изображений и других материалов.",
+      id: "content", short: "Inhalte", title: "Übernahme und Bearbeitung bestehender Inhalte", color: "#48A942", intro: "Die bestehende Website dient als wichtigste Grundlage für die Übernahme von Nachrichten, Veranstaltungen, Projekten, Seiten, Bildern und weiteren Materialien.",
       questions: [
-        { id: "4.1", title: "Как поступать с существующими текстами при переносе?", type: "radio", options: ["Переносить по возможности без изменений", "При необходимости немного сокращать и упрощать", "Существенно перерабатывать отдельные тексты, сохраняя их основной смысл", "Решать индивидуально в зависимости от материала", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "4.2", title: "Подходит ли вам следующий рабочий подход?", type: "radio", note: "При необходимости существующие тексты могут быть структурированы, сокращены и языково упрощены с использованием современных языковых и редакционных инструментов. Если содержание или формулировка существенно изменяются, обновлённый текст сначала предоставляется IBB для проверки и подтверждения и только после этого публикуется.", options: ["Да, такой подход подходит", "Нет", "Хотели бы изменить процесс"], conditional: { when: "Хотели бы изменить процесс", label: "Как вы хотели бы изменить процесс?" } },
-        { id: "4.3", title: "Есть ли содержание, которого нет на существующем сайте и которое IBB планирует дополнительно предоставить для первой версии?", type: "radio", options: ["Нет, основной материал уже существует на сайте", "Да"], conditional: { when: "Да", label: "Какое содержание?" } }
+        { id: "4.1", title: "Wie soll bei der Übernahme mit bestehenden Texten umgegangen werden?", type: "radio", options: ["Möglichst unverändert übernehmen", "Bei Bedarf leicht kürzen und vereinfachen", "Einzelne Texte deutlich überarbeiten und ihre Kernaussage erhalten", "Je nach Inhalt individuell entscheiden", "Wir wünschen eine Empfehlung"] },
+        { id: "4.2", title: "Ist der folgende Arbeitsablauf für Sie passend?", type: "radio", note: "Bestehende Texte können bei Bedarf strukturiert, gekürzt und sprachlich vereinfacht werden. Wenn Inhalt oder Formulierung wesentlich verändert werden, erhält IBB die überarbeitete Fassung zunächst zur Prüfung und Freigabe. Erst danach wird sie veröffentlicht.", options: ["Ja, dieser Ablauf passt", "Nein", "Wir möchten den Ablauf anpassen"], conditional: { when: "Wir möchten den Ablauf anpassen", label: "Wie soll der Ablauf geändert werden?" } },
+        { id: "4.3", title: "Plant IBB für die erste Version zusätzliche Inhalte bereitzustellen, die noch nicht auf der bestehenden Website vorhanden sind?", type: "radio", options: ["Nein, das wesentliche Material ist bereits auf der Website vorhanden", "Ja"], conditional: { when: "Ja", label: "Welche Inhalte?" } }
       ]
     },
     {
-      id: "events", short: "Veranstaltungen", title: "Veranstaltungen", color: "#00A79D", intro: "Существующие мероприятия и их история должны быть перенесены. Для нового сайта будет предложен современный способ представления ближайших и прошедших событий.",
+      id: "events", short: "Termine", title: "Veranstaltungen", color: "#00A79D", intro: "Bestehende Veranstaltungen und ihre Historie sollen übernommen werden. Für die neue Website wird eine moderne Darstellung kommender und vergangener Termine entwickelt.",
       questions: [
-        { id: "5.1", title: "Какая информация обязательно должна присутствовать у мероприятия?", type: "checkbox", options: ["Название", "Дата и время", "Место", "Организатор", "Краткое описание", "Подробное описание", "Изображение / Flyer", "Ссылка на дополнительную информацию", "Ссылка на Anmeldung", "Zielgruppe", "Kontakt", "Хотели бы получить рекомендацию стандартного набора"] },
-        { id: "5.2", title: "Какие возможности поиска или фильтрации мероприятий были бы действительно полезны?", type: "checkbox", note: "Например, посетитель сможет оставить только мероприятия определённой Zielgruppe или только события Netzwerkpartner.", options: ["По дате", "По теме", "По Zielgruppe", "По организатору", "Собственные мероприятия IBB / мероприятия Netzwerkpartner", "Специальные фильтры не нужны", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "5.3", title: "Подходит ли следующий принцип для завершённых мероприятий?", type: "radio", note: "После завершения мероприятие остаётся в истории сайта. При наличии материалов на его страницу можно добавить несколько фотографий и короткий Rückblick.", options: ["Да", "Только для особенно важных мероприятий", "Нет, достаточно оставить первоначальное описание", "Другой вариант"], conditional: { when: "Другой вариант", label: "Комментарий" } },
-        { id: "5.4", title: "Какой объём фотографий после мероприятия вам кажется разумным?", type: "radio", options: ["Несколько выбранных фотографий, например 3–8", "Больше фотографий при наличии хорошего материала", "Зависит от мероприятия", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "5.5", title: "Есть ли типы мероприятий, которые должны особенно выделяться на сайте?", type: "radio", hint: "Например: собственные крупные Veranstaltungen IBB, besondere Aktionen или мероприятия для молодёжи.", options: ["Нет", "Да"], conditional: { when: "Да", label: "Какие именно?" } }
+        { id: "5.1", title: "Welche Angaben müssen bei einer Veranstaltung unbedingt vorhanden sein?", type: "checkbox", options: ["Titel", "Datum und Uhrzeit", "Ort", "Veranstalter", "Kurzbeschreibung", "Ausführliche Beschreibung", "Bild / Flyer", "Link zu weiteren Informationen", "Link zur Anmeldung", "Zielgruppe", "Kontakt", "Wir wünschen eine Empfehlung für einen Standardumfang"] },
+        { id: "5.2", title: "Welche Such- oder Filtermöglichkeiten für Veranstaltungen wären wirklich hilfreich?", type: "checkbox", note: "Besucherinnen und Besucher könnten beispielsweise nur Veranstaltungen für eine bestimmte Zielgruppe oder nur Termine von Netzwerkpartnern anzeigen.", options: ["Nach Datum", "Nach Thema", "Nach Zielgruppe", "Nach Veranstalter", "Eigene Veranstaltungen von IBB / Veranstaltungen von Netzwerkpartnern", "Keine besonderen Filter erforderlich", "Wir wünschen eine Empfehlung"] },
+        { id: "5.3", title: "Ist der folgende Umgang mit vergangenen Veranstaltungen für Sie passend?", type: "radio", note: "Nach dem Termin bleibt die Veranstaltung in der Historie der Website erhalten. Wenn Material vorhanden ist, können einige Fotos und ein kurzer Rückblick ergänzt werden.", options: ["Ja", "Nur bei besonders wichtigen Veranstaltungen", "Nein, die ursprüngliche Beschreibung reicht aus", "Andere Lösung"], conditional: { when: "Andere Lösung", label: "Kommentar" } },
+        { id: "5.4", title: "Wie viele Fotos nach einer Veranstaltung erscheinen Ihnen sinnvoll?", type: "radio", options: ["Einige ausgewählte Fotos, zum Beispiel 3–8", "Mehr Fotos, wenn gutes Material vorhanden ist", "Abhängig von der Veranstaltung", "Wir wünschen eine Empfehlung"] },
+        { id: "5.5", title: "Gibt es Veranstaltungsarten, die auf der Website besonders hervorgehoben werden sollen?", type: "radio", hint: "Zum Beispiel große eigene Veranstaltungen von IBB, besondere Aktionen oder Angebote für Jugendliche.", options: ["Nein", "Ja"], conditional: { when: "Ja", label: "Welche?" } }
       ]
     },
     {
-      id: "management", short: "Управление", title: "Самостоятельная работа IBB с сайтом", color: "#1597B8", intro: "Сайт должен оставаться простым в управлении, даже если значительная часть текущего сопровождения будет выполняться исполнителем.",
+      id: "management", short: "Pflege", title: "Eigenständige Pflege durch IBB", color: "#1597B8", intro: "Die Website soll einfach zu pflegen sein, auch wenn ein wesentlicher Teil der laufenden Betreuung durch den Auftragnehmer erfolgt.",
       questions: [
-        { id: "6.1", title: "Что представители IBB хотели бы при необходимости иметь возможность самостоятельно добавлять или изменять?", type: "checkbox", options: ["Veranstaltungen", "Nachrichten / kurze Rückblicke", "Bilder", "Простые тексты на существующих страницах", "Projekte", "Netzwerkpartner", "Желательно иметь возможность изменять всё основное содержание", "Достаточно минимальных возможностей, поскольку основную Pflege выполняет исполнитель"] },
-        { id: "6.2", title: "Сколько человек примерно будут иметь доступ к редактированию сайта?", type: "radio", options: ["1 человек", "2 человека", "3–4 человека", "Пока не определено"] },
-        { id: "6.3", title: "Подходит ли предлагаемый процесс согласования материалов?", type: "radio", flow: ["Информация / исходный материал", "Подготовка публикации исполнителем", "Короткая проверка IBB", "Публикация после подтверждения"], options: ["Да", "Нет", "Хотели бы изменить его"], conditional: { when: "Хотели бы изменить его", label: "Как вы хотели бы организовать согласование?" } },
-        { id: "6.4", title: "Как вам удобнее подтверждать подготовленные материалы?", type: "radio", options: ["По E-Mail", "Через Messenger / WhatsApp", "В общей рабочей системе / документе", "Не принципиально", "Хотели бы получить предложение исполнителя"] }
+        { id: "6.1", title: "Welche Inhalte möchten Vertreterinnen und Vertreter von IBB bei Bedarf selbst hinzufügen oder bearbeiten können?", type: "checkbox", options: ["Veranstaltungen", "Nachrichten / kurze Rückblicke", "Bilder", "Einfache Texte auf bestehenden Seiten", "Projekte", "Netzwerkpartner", "Die wichtigsten Inhalte sollten möglichst vollständig selbst bearbeitet werden können", "Minimale Bearbeitungsmöglichkeiten reichen aus, da die laufende Pflege überwiegend durch den Auftragnehmer erfolgt"] },
+        { id: "6.2", title: "Wie viele Personen werden voraussichtlich Zugriff auf die Bearbeitung der Website erhalten?", type: "radio", options: ["1 Person", "2 Personen", "3–4 Personen", "Noch nicht festgelegt"] },
+        { id: "6.3", title: "Ist der vorgeschlagene Abstimmungsprozess für Inhalte passend?", type: "radio", flow: ["Information / Ausgangsmaterial", "Vorbereitung durch den Auftragnehmer", "Kurze Prüfung durch IBB", "Veröffentlichung nach Freigabe"], options: ["Ja", "Nein", "Wir möchten den Ablauf anpassen"], conditional: { when: "Wir möchten den Ablauf anpassen", label: "Wie soll die Abstimmung organisiert werden?" } },
+        { id: "6.4", title: "Wie möchten Sie vorbereitete Inhalte am liebsten freigeben?", type: "radio", options: ["Per E-Mail", "Über Messenger / WhatsApp", "In einem gemeinsamen Arbeitssystem oder Dokument", "Der Weg ist nicht entscheidend", "Wir wünschen einen Vorschlag"] }
       ]
     },
     {
-      id: "newsletter", short: "Newsletter", title: "Newsletter", color: "#6047B5", intro: "Существующая база подписчиков должна быть сохранена. Частота коммуникации может зависеть от количества мероприятий и актуальных тем.",
+      id: "newsletter", short: "Newsletter", title: "Newsletter", color: "#6047B5", intro: "Der bestehende Verteiler soll erhalten bleiben. Die Häufigkeit kann sich nach der Zahl der Veranstaltungen und aktuellen Themen richten.",
       questions: [
-        { id: "7.1", title: "Какой принцип Newsletter-коммуникации вам ближе?", type: "radio", note: "Здесь речь не о жёстком количестве писем в месяц, а об общей логике рассылки.", options: ["Newsletter отправляется по мере появления достаточного количества актуальной информации", "Регулярный общий Newsletter с новостями, проектами и ближайшими мероприятиями", "Основной акцент на коммуникации вокруг важных мероприятий", "Комбинированный вариант: общий Newsletter + отдельные рассылки по важным мероприятиям", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "7.2", title: "Какие материалы должны обычно входить в Newsletter?", type: "checkbox", options: ["Ближайшие мероприятия", "Новости IBB", "Projekte", "Rückblicke прошедших мероприятий", "Новости Netzwerkpartner", "Zusammenarbeit mit Wirtschaft", "Темы, связанные с демократией, Vielfalt, Respekt и ценностями IBB"] },
-        { id: "7.3", title: "Для особенно важных мероприятий подходит ли следующий принцип коммуникации?", type: "radio", timeline: ["Предварительный анонс за несколько недель до мероприятия", "При необходимости напоминание незадолго до мероприятия", "После мероприятия — короткий Rückblick с фотографиями и основными итогами"], options: ["Да", "Да, но только для отдельных крупных мероприятий", "Нет, достаточно информации в общем Newsletter", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "7.4", title: "Кто предоставляет исходную информацию для Newsletter?", type: "radio", options: ["IBB предоставляет основные факты и материалы, исполнитель готовит Newsletter", "В основном используется уже опубликованное содержание сайта", "Комбинированный вариант"] },
-        { id: "7.5", title: "Нужны ли кроме регулярных Newsletter отдельные специальные выпуски для важных тем, Kampagnen или срочных сообщений?", type: "radio", options: ["Да", "Нет", "Только при необходимости", "Хотели бы получить рекомендацию исполнителя"] }
+        { id: "7.1", title: "Welcher Grundsatz für die Newsletter-Kommunikation passt am besten zu Ihnen?", type: "radio", note: "Es geht nicht um eine feste Zahl von E-Mails pro Monat, sondern um die grundsätzliche Logik des Versands.", options: ["Ein Newsletter wird versendet, sobald genügend aktuelle Informationen vorliegen", "Ein regelmäßiger allgemeiner Newsletter bündelt Nachrichten, Projekte und kommende Veranstaltungen", "Der Schwerpunkt liegt auf der Kommunikation rund um wichtige Veranstaltungen", "Kombination aus allgemeinem Newsletter und separaten Ausgaben zu wichtigen Veranstaltungen", "Wir wünschen eine Empfehlung"] },
+        { id: "7.2", title: "Welche Inhalte sollen üblicherweise im Newsletter erscheinen?", type: "checkbox", options: ["Kommende Veranstaltungen", "Nachrichten von IBB", "Projekte", "Rückblicke auf vergangene Veranstaltungen", "Nachrichten von Netzwerkpartnern", "Zusammenarbeit mit der lokalen Wirtschaft", "Themen zu Demokratie, Vielfalt, Respekt und den Werten von IBB"] },
+        { id: "7.3", title: "Ist für besonders wichtige Veranstaltungen der folgende Kommunikationsablauf passend?", type: "radio", timeline: ["Erste Ankündigung einige Wochen vor der Veranstaltung", "Bei Bedarf eine Erinnerung kurz vor dem Termin", "Nach der Veranstaltung ein kurzer Rückblick mit Fotos und den wichtigsten Ergebnissen"], options: ["Ja", "Ja, aber nur bei ausgewählten großen Veranstaltungen", "Nein, Informationen im allgemeinen Newsletter reichen aus", "Wir wünschen eine Empfehlung"] },
+        { id: "7.4", title: "Wer liefert die Ausgangsinformationen für den Newsletter?", type: "radio", options: ["IBB liefert die wichtigsten Fakten und Materialien, der Auftragnehmer erstellt den Newsletter", "Es werden überwiegend bereits veröffentlichte Inhalte der Website verwendet", "Kombination aus beiden Varianten"] },
+        { id: "7.5", title: "Werden neben dem regulären Newsletter besondere Ausgaben für wichtige Themen, Kampagnen oder dringende Mitteilungen benötigt?", type: "radio", options: ["Ja", "Nein", "Nur bei Bedarf", "Wir wünschen eine Empfehlung"] }
       ]
     },
     {
-      id: "social", short: "Social Media", title: "Facebook и Instagram", color: "#C20A7A", intro: "На данном этапе планируется работа с существующими каналами Facebook и Instagram.",
+      id: "social", short: "Social Media", title: "Facebook und Instagram", color: "#C20A7A", intro: "Derzeit ist die Arbeit mit den bestehenden Kanälen auf Facebook und Instagram vorgesehen.",
       questions: [
-        { id: "8.1", title: "Подходит ли следующий принцип коммуникации вокруг важных мероприятий?", type: "radio", stages: [{ label: "До", text: "Анонс; при необходимости Reminder." }, { label: "Во время", text: "Короткая публикация или Story, если есть подходящий материал." }, { label: "После", text: "Фотографии; короткий Bericht / Rückblick." }], options: ["Да", "Только для наиболее важных мероприятий", "Хотели бы получить другую рекомендацию"], conditional: { when: "Хотели бы получить другую рекомендацию", label: "Комментарий / пожелание" } },
-        { id: "8.2", title: "Какие дополнительные темы должны регулярно появляться в Social Media?", type: "checkbox", options: ["Новости IBB", "Projekte", "Vorstellung von Netzwerkpartnern", "Zusammenarbeit mit lokalen Unternehmen", "Demokratie", "Vielfalt", "Respekt und Toleranz", "Menschenrechte", "Informationen für Jugendliche", "Ausbildung / Praktikum / Zusammenarbeit mit Schulen"] },
-        { id: "8.3", title: "Насколько активно исполнитель должен самостоятельно предлагать темы для новых публикаций?", type: "radio", options: ["Исполнитель может регулярно предлагать собственные темы и идеи", "В основном публикации должны исходить из деятельности и материалов IBB", "Комбинированный вариант", "Хотели бы получить рекомендацию"] }
+        { id: "8.1", title: "Ist der folgende Kommunikationsablauf rund um wichtige Veranstaltungen passend?", type: "radio", stages: [{ label: "Vorher", text: "Ankündigung und bei Bedarf Erinnerung." }, { label: "Währenddessen", text: "Kurzer Beitrag oder eine Story, wenn geeignetes Material vorhanden ist." }, { label: "Danach", text: "Fotos und ein kurzer Bericht oder Rückblick." }], options: ["Ja", "Nur bei den wichtigsten Veranstaltungen", "Wir wünschen eine andere Empfehlung"], conditional: { when: "Wir wünschen eine andere Empfehlung", label: "Kommentar / Wunsch" } },
+        { id: "8.2", title: "Welche weiteren Themen sollen regelmäßig in den sozialen Medien erscheinen?", type: "checkbox", options: ["Nachrichten von IBB", "Projekte", "Vorstellung von Netzwerkpartnern", "Zusammenarbeit mit lokalen Unternehmen", "Demokratie", "Vielfalt", "Respekt und Toleranz", "Menschenrechte", "Informationen für Jugendliche", "Ausbildung / Praktikum / Zusammenarbeit mit Schulen"] },
+        { id: "8.3", title: "Wie aktiv soll der Auftragnehmer selbst Themen für neue Beiträge vorschlagen?", type: "radio", options: ["Der Auftragnehmer kann regelmäßig eigene Themen und Ideen vorschlagen", "Beiträge sollen überwiegend aus den Aktivitäten und Materialien von IBB entstehen", "Kombination aus beiden Varianten", "Wir wünschen eine Empfehlung"] }
       ]
     },
     {
-      id: "business", short: "Wirtschaft", title: "Zusammenarbeit mit der lokalen Wirtschaft", color: "#0E4A9A", intro: "Это направление должно войти уже в первую версию нового сайта.",
+      id: "business", short: "Wirtschaft", title: "Zusammenarbeit mit der lokalen Wirtschaft", color: "#0E4A9A", intro: "Dieser Bereich soll bereits in die erste Version der neuen Website aufgenommen werden.",
       questions: [
-        { id: "9.1", title: "Что представитель местного предприятия должен узнать из этого раздела?", type: "checkbox", options: ["Кто такие Idstein bleibt bunt", "Почему сотрудничество с IBB может быть интересно", "Какие формы сотрудничества возможны", "Какие Unternehmen уже сотрудничают с Netzwerk", "Как связаться с IBB", "Möglichkeiten für Praktikum / Ausbildung", "Zusammenarbeit mit Schulen", "Возможность поддержать Projekt / Veranstaltung"] },
-        { id: "9.2", title: "Нужно ли отдельно представлять Unternehmen, которые уже сотрудничают с IBB?", type: "radio", options: ["Да", "Нет", "Пока таких партнёров недостаточно, но возможность следует предусмотреть", "Хотели бы получить рекомендацию исполнителя"] },
-        { id: "9.3", title: "Есть ли уже конкретные формы сотрудничества с Unternehmen, которые обязательно нужно показать на сайте?", type: "radio", hint: "Например: Praktikum, Ausbildung, поддержка конкретных проектов, совместные Aktionen, взаимодействие со школами.", options: ["Пока нет", "Да"], conditional: { when: "Да", label: "Какие именно?" } }
+        { id: "9.1", title: "Was sollen Vertreterinnen und Vertreter lokaler Unternehmen in diesem Bereich erfahren?", type: "checkbox", options: ["Wer Idstein bleibt bunt ist", "Warum eine Zusammenarbeit mit IBB interessant sein kann", "Welche Formen der Zusammenarbeit möglich sind", "Welche Unternehmen bereits mit dem Netzwerk zusammenarbeiten", "Wie IBB erreichbar ist", "Möglichkeiten für Praktikum / Ausbildung", "Zusammenarbeit mit Schulen", "Möglichkeiten zur Unterstützung eines Projekts oder einer Veranstaltung"] },
+        { id: "9.2", title: "Sollen Unternehmen, die bereits mit IBB zusammenarbeiten, gesondert vorgestellt werden?", type: "radio", options: ["Ja", "Nein", "Derzeit gibt es noch zu wenige Partner, die Möglichkeit soll aber vorgesehen werden", "Wir wünschen eine Empfehlung"] },
+        { id: "9.3", title: "Gibt es bereits konkrete Formen der Zusammenarbeit mit Unternehmen, die auf der Website unbedingt gezeigt werden sollen?", type: "radio", hint: "Zum Beispiel Praktikum, Ausbildung, Unterstützung konkreter Projekte, gemeinsame Aktionen oder die Zusammenarbeit mit Schulen.", options: ["Noch nicht", "Ja"], conditional: { when: "Ja", label: "Welche?" } }
       ]
     },
     {
-      id: "design", short: "Дизайн", title: "Визуальное направление", color: "#F28C00", intro: "Первые представленные варианты нового визуального направления были восприняты положительно. Детальное проектирование предлагается согласовывать на основе конкретных макетов.",
+      id: "design", short: "Gestaltung", title: "Visuelle Ausrichtung", color: "#F28C00", intro: "Die ersten vorgestellten Ansätze für die neue visuelle Ausrichtung wurden positiv aufgenommen. Die detaillierte Gestaltung soll anhand konkreter Entwürfe abgestimmt werden.",
       questions: [
-        { id: "10.1", title: "Есть ли что-то, чего на новом сайте точно не должно быть?", type: "radio", hint: "Например: определённые цвета, слишком официальный стиль, слишком большое количество текста, сложная навигация.", options: ["Нет особых ограничений", "Да"], conditional: { when: "Да", label: "Что именно?" } },
-        { id: "10.2", title: "Кроме существующего логотипа, есть ли визуальные материалы или элементы, которые обязательно должны быть сохранены?", type: "radio", options: ["Нет", "Да"], conditional: { when: "Да", label: "Что именно?" } }
+        { id: "10.1", title: "Gibt es etwas, das auf der neuen Website auf keinen Fall vorkommen soll?", type: "radio", hint: "Zum Beispiel bestimmte Farben, ein zu offizieller Stil, zu viel Text oder eine komplizierte Navigation.", options: ["Keine besonderen Einschränkungen", "Ja"], conditional: { when: "Ja", label: "Was genau?" } },
+        { id: "10.2", title: "Gibt es neben dem bestehenden Logo weitere visuelle Materialien oder Elemente, die unbedingt erhalten bleiben sollen?", type: "radio", options: ["Nein", "Ja"], conditional: { when: "Ja", label: "Welche?" } }
       ]
     },
     {
-      id: "support", short: "Сопровождение", title: "Постоянное сопровождение", color: "#48A942", intro: "По текущему пониманию сопровождение включает сайт, Veranstaltungen, Nachrichten, Facebook, Instagram, Newsletter, фотографии, небольшие изменения и предложения по развитию цифрового присутствия IBB.",
+      id: "support", short: "Betreuung", title: "Laufende Betreuung", color: "#48A942", intro: "Nach aktuellem Verständnis umfasst die Betreuung die Website, Veranstaltungen, Nachrichten, Facebook, Instagram, Newsletter, Fotos, kleinere Änderungen und Vorschläge zur Weiterentwicklung des digitalen Auftritts von IBB.",
       questions: [
-        { id: "11.1", title: "Есть ли что-либо из перечисленного, что не должно входить в постоянное сопровождение?", type: "radio", options: ["Нет, перечисленные направления подходят", "Да, отдельные задачи не требуются"], conditional: { when: "Да, отдельные задачи не требуются", label: "Что именно не требуется?" } },
-        { id: "11.2", title: "Есть ли дополнительные задачи, которые вы ожидаете от постоянного сопровождения?", type: "radio", options: ["Нет", "Да"], conditional: { when: "Да", label: "Какие задачи?" } },
-        { id: "11.3", title: "Как быстро обычно должна публиковаться актуальная информация после её получения исполнителем?", type: "radio", options: ["Срочная информация — по возможности в тот же день", "Обычно в течение 1–2 рабочих дней", "Обычно в течение нескольких рабочих дней", "В зависимости от типа материала", "Хотели бы получить предложение по стандартному процессу"] }
+        { id: "11.1", title: "Gibt es etwas aus dieser Aufzählung, das nicht Teil der laufenden Betreuung sein soll?", type: "radio", options: ["Nein, die genannten Bereiche passen", "Ja, einzelne Aufgaben werden nicht benötigt"], conditional: { when: "Ja, einzelne Aufgaben werden nicht benötigt", label: "Welche Aufgaben werden nicht benötigt?" } },
+        { id: "11.2", title: "Erwarten Sie weitere Aufgaben im Rahmen der laufenden Betreuung?", type: "radio", options: ["Nein", "Ja"], conditional: { when: "Ja", label: "Welche Aufgaben?" } },
+        { id: "11.3", title: "Wie schnell sollen aktuelle Informationen nach Eingang beim Auftragnehmer normalerweise veröffentlicht werden?", type: "radio", options: ["Dringende Informationen möglichst noch am selben Tag", "In der Regel innerhalb von 1–2 Arbeitstagen", "In der Regel innerhalb weniger Arbeitstage", "Abhängig von der Art des Materials", "Wir wünschen einen Vorschlag für einen Standardablauf"] }
       ]
     },
     {
-      id: "extra", short: "Дополнительно", title: "Дополнительные пожелания", color: "#6047B5", intro: "Последний раздел — место для всего важного, что не вошло в предыдущие вопросы.",
+      id: "extra", short: "Ergänzungen", title: "Weitere Wünsche", color: "#6047B5", intro: "Im letzten Bereich ist Platz für alles Wichtige, das in den vorherigen Fragen noch nicht angesprochen wurde.",
       questions: [
-        { id: "12.1", title: "Есть ли что-то важное для нового сайта или дальнейшего цифрового сопровождения, чего мы пока не обсудили?", type: "textarea", optional: true },
-        { id: "12.2", title: "Есть ли идеи, которые сейчас не обязательны, но которые вы хотели бы предусмотреть для дальнейшего развития?", type: "textarea", hint: "Например, функции или направления, которые могут стать актуальными позже.", optional: true }
+        { id: "12.1", title: "Gibt es etwas Wichtiges für die neue Website oder die weitere digitale Betreuung, das wir bisher nicht besprochen haben?", type: "textarea", optional: true },
+        { id: "12.2", title: "Gibt es Ideen, die derzeit noch nicht erforderlich sind, aber bei der späteren Weiterentwicklung berücksichtigt werden sollten?", type: "textarea", hint: "Zum Beispiel Funktionen oder Themenbereiche, die später relevant werden könnten.", optional: true }
       ]
     }
   ];

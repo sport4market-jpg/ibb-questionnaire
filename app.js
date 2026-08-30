@@ -2,7 +2,7 @@
   "use strict";
 
   var DATA = window.QUESTIONNAIRE_DATA;
-  var STORAGE_KEY = "ibb-questionnaire-v1";
+  var STORAGE_KEY = "ibb-questionnaire-de-v2";
   var allQuestions = [];
   var questionMeta = {};
   var firstIndexBySection = {};
@@ -99,7 +99,7 @@
       saveTimer = setTimeout(function () { dom.saveStatus.classList.remove("is-saving"); }, 450);
     } catch (error) {
       dom.saveStatus.classList.add("is-error");
-      byId("save-label").textContent = "Не удалось сохранить локально";
+      byId("save-label").textContent = "Lokales Speichern nicht möglich";
     }
   }
 
@@ -154,10 +154,6 @@
     });
   }
 
-  function hasSavedProgress() {
-    return Boolean(state.started || Object.keys(state.answers).length || state.contact.name || state.contact.email);
-  }
-
   function showStart() {
     dom.startScreen.hidden = false;
     dom.surveyShell.hidden = true;
@@ -165,37 +161,22 @@
     document.body.style.removeProperty("--accent");
     renderStartActions();
     window.scrollTo(0, 0);
-    document.title = "Предварительный опросник — Idstein bleibt bunt";
+    document.title = "Vorbereitender Fragebogen — Idstein bleibt bunt";
   }
 
   function renderStartActions() {
     var actions = byId("start-actions");
     actions.replaceChildren();
 
-    if (hasSavedProgress()) {
-      var resume = make("button", "button button-primary start-cta", DATA.ui.resume);
-      resume.type = "button";
-      resume.addEventListener("click", showSurvey);
-      actions.appendChild(resume);
-
-      var restart = make("button", "button button-tertiary", DATA.ui.restart);
-      restart.type = "button";
-      restart.addEventListener("click", function () {
-        if (!window.confirm("Начать заново? Сохранённые на этом устройстве ответы будут удалены.")) return;
-        state = emptyState();
-        localStorage.removeItem(STORAGE_KEY);
-        startNew();
-      });
-      actions.appendChild(restart);
-    } else {
-      var start = make("button", "button button-primary start-cta", DATA.ui.start);
-      start.type = "button";
-      start.addEventListener("click", startNew);
-      actions.appendChild(start);
-    }
+    var start = make("button", "button button-primary start-cta", DATA.ui.start);
+    start.type = "button";
+    start.addEventListener("click", startNew);
+    actions.appendChild(start);
   }
 
   function startNew() {
+    localStorage.removeItem(STORAGE_KEY);
+    state = emptyState();
     state.started = true;
     state.current = 0;
     saveState();
@@ -220,7 +201,7 @@
     else dom.sendStatus.hidden = true;
     updateSummary();
     window.scrollTo(0, 0);
-    document.title = "Ответы готовы — Idstein bleibt bunt";
+    document.title = "Antworten bereit — Idstein bleibt bunt";
     requestAnimationFrame(function () { byId("final-title").focus({ preventScroll: true }); });
   }
 
@@ -284,7 +265,7 @@
 
     var number = state.current + 1;
     var percent = Math.round((number / allQuestions.length) * 100);
-    dom.progressLabel.textContent = "Раздел " + (meta.sectionIndex + 1) + " из " + DATA.sections.length + " · Вопрос " + number + " из " + allQuestions.length;
+    dom.progressLabel.textContent = "Bereich " + (meta.sectionIndex + 1) + " von " + DATA.sections.length + " · Frage " + number + " von " + allQuestions.length;
     dom.progressPercent.textContent = percent + "%";
     dom.progressTrack.setAttribute("aria-valuenow", percent);
     dom.progressFill.style.width = percent + "%";
@@ -329,7 +310,7 @@
     var textarea = make("textarea", "text-answer");
     textarea.id = "answer-" + question.id;
     textarea.value = answer.value || "";
-    textarea.placeholder = question.hint || "Введите ваш ответ…";
+    textarea.placeholder = question.hint || "Geben Sie Ihre Antwort ein …";
     textarea.addEventListener("input", function () {
       answer.value = textarea.value;
       state.answers[question.id] = answer;
@@ -469,7 +450,7 @@
       else goToQuestion(state.current - 1);
     });
 
-    var nextLabel = state.current === allQuestions.length - 1 ? "К итогам →" : DATA.ui.next;
+    var nextLabel = state.current === allQuestions.length - 1 ? "Zur Übersicht →" : DATA.ui.next;
     var next = make("button", "button button-primary", nextLabel);
     next.type = "button";
     next.addEventListener("click", function () {
@@ -511,11 +492,11 @@
   function buildMessage() {
     var lines = [
       "Idstein bleibt bunt",
-      "Ответы на предварительный опросник",
+      "Antworten auf den vorbereitenden Fragebogen",
       "",
-      "Имя: " + (state.contact.name.trim() || "Не указано"),
-      "E-mail: " + (state.contact.email.trim() || "Не указан"),
-      "Дата: " + new Date().toLocaleString("ru-RU"),
+      "Name: " + (state.contact.name.trim() || "Nicht angegeben"),
+      "E-Mail: " + (state.contact.email.trim() || "Nicht angegeben"),
+      "Datum: " + new Date().toLocaleString("de-DE"),
       ""
     ];
 
@@ -526,9 +507,9 @@
         lines.push(question.id + " " + question.title);
         if (Array.isArray(answer.value)) {
           if (answer.value.length) answer.value.forEach(function (value) { lines.push("• " + value); });
-          else lines.push("Без ответа");
+          else lines.push("Keine Antwort");
         } else {
-          lines.push(String(answer.value || "").trim() || "Без ответа");
+          lines.push(String(answer.value || "").trim() || "Keine Antwort");
         }
         if (question.conditional && answer.value === question.conditional.when && String(answer.extra || "").trim()) {
           lines.push(question.conditional.label + ":", String(answer.extra).trim());
@@ -577,10 +558,10 @@
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          name: state.contact.name.trim() || "Не указано",
-          email: state.contact.email.trim() || "Не указан",
+          name: state.contact.name.trim() || "Nicht angegeben",
+          email: state.contact.email.trim() || "Nicht angegeben",
           message: buildMessage(),
-          _subject: "Новый опросник — Idstein bleibt bunt",
+          _subject: "Neuer Fragebogen — Idstein bleibt bunt",
           _template: "box",
           _captcha: "false",
           _honey: "",
@@ -590,20 +571,20 @@
 
       var result = await response.json().catch(function () { return {}; });
       var accepted = result.success === true || result.success === "true";
-      if (!response.ok || !accepted) throw new Error(result.message || "Сервис не принял сообщение");
+      if (!response.ok || !accepted) throw new Error(result.message || "Der Versanddienst hat die Nachricht nicht angenommen");
 
       state.sent = true;
       saveState();
 
       if (/activat|confirm|verify/i.test(String(result.message || ""))) {
-        setSendStatus("success", "Нужно один раз подтвердить адрес: откройте письмо FormSubmit в saxon@ukr.net и нажмите Activate Form. После подтверждения ответы будут доставлены.");
+        setSendStatus("success", "Die Empfängeradresse muss einmal bestätigt werden. Öffnen Sie die FormSubmit-E-Mail an saxon@ukr.net und wählen Sie „Activate Form“. Danach werden die Antworten zugestellt.");
       } else {
         setSendStatus("success", DATA.ui.sent);
       }
     } catch (error) {
       state.sent = false;
       saveState();
-      setSendStatus("error", "Не удалось отправить ответы. Проверьте интернет и попробуйте ещё раз. Сохранённая копия ответов не потеряна.");
+      setSendStatus("error", "Die Antworten konnten nicht gesendet werden. Prüfen Sie Ihre Internetverbindung und versuchen Sie es erneut. Ihre lokal gespeicherten Antworten bleiben erhalten.");
       console.error("Questionnaire submission failed:", error);
     } finally {
       dom.submitButton.disabled = false;
